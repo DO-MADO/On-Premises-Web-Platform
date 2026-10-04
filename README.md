@@ -5,7 +5,7 @@
 사내 서버에서 동작하는 웹 서비스를 만들고 서버 설치부터 HTTPS 적용, 배포 자동화, 로그 관리까지 맡았습니다.<br>
 이후 관리자 인증과 콘텐츠 관리, 이미지 업로드, 다국어·테마 전환 기능을 추가했습니다.<br>
 
-[포트폴리오 보기](https://parkgeonhoportfolio.notion.site/22f31721b58980f890eceeec401a3861)
+[포트폴리오 보기](https://domado.me/portfolio)
 
 <br>
 <br>
@@ -44,12 +44,12 @@
 <br>
 
 ## ▎ 설계 판단과 시스템 구조
+![1인 개발과 온프레미스 제약에서 배포·서빙·보안·업로드 대안을 비교한 IDEAL 자료](assets/images/slides/02-ideal-design-decisions.png)
+
 
 ### · IDEAL과 기술 선택
 
-![1인 개발과 온프레미스 제약에서 배포·서빙·보안·업로드 대안을 비교한 IDEAL 자료](assets/images/slides/02-ideal-design-decisions.png)
 
-<br>
 
 1인 개발과 제한된 구축 기간을 고려해 구현 속도, 반복 운영 부담, 장애 시 복구 방법을 함께 비교했습니다.<br>
 Nginx는 정적 파일 제공과 API 라우팅을 맡고 PM2는 Node.js 프로세스를 관리하도록 구성했습니다.<br>
@@ -65,24 +65,24 @@ Nginx는 정적 파일 제공과 API 라우팅을 맡고 PM2는 Node.js 프로�
 | 이미지 관리 | Base64 저장, 파일 업로드 + URL 서빙 | Multer로 파일을 저장하고 URL로 조회하는 방식으로 변경 |
 
 <br>
+<br>
 
-### · 시스템 아키텍처
+## ▎ 시스템 아키텍처
 
 ![단일 공인 IP에서 Nginx로 도메인별 요청을 나누는 온프레미스 시스템 아키텍처](assets/images/slides/05-system-architecture.jpg)
 
-<br>
 
 공유기의 80·443 포트 요청을 Nginx 서버로 모으고 요청 도메인에 따라 웹 서비스와 기존 내부 서비스를 구분했습니다.<br>
 React 빌드 결과는 정적 파일로 제공하고 API 요청은 Express로 전달합니다.<br>
 다른 내부 서버로 향하는 요청도 Nginx를 거치도록 정리했습니다.<br>
 
 <br>
+<br>
 
-### · 서버 및 인프라
+## ▎ 서버 및 인프라
 
 ![Ubuntu Server와 Nginx·PM2·Certbot으로 구성한 서버 및 인프라](assets/images/slides/04-server-and-infrastructure.jpg)
 
-<br>
 
 Ubuntu Server 설치부터 무선 LAN 드라이버 오프라인 설치와 Netplan 설정까지 직접 진행했습니다.<br>
 UFW에서 웹 서비스와 SSH에 필요한 포트만 허용하고 백엔드 포트는 외부에서 직접 접근하지 않도록 구성했습니다.<br>
@@ -166,7 +166,6 @@ UFW에서 웹 서비스와 SSH에 필요한 포트만 허용하고 백엔드 포
 
 ![HTTPS·방화벽·입력 검증과 메일 전송 설정을 정리한 보안 및 안정성 설계](assets/images/slides/06-security-and-reliability.jpg)
 
-<br>
 
 ### · 요청 검증과 관리자 인증
 
@@ -181,7 +180,6 @@ Express API에 validator, sanitize-html, 요청 횟수 제한, CORS 허용 목�
 Certbot으로 인증서를 발급하고 자동 갱신을 구성했으며 HTTP 요청은 HTTPS로 전환하도록 설정했습니다.<br>
 인증서 검증에 쓰는 ACME 경로는 리다이렉트 예외로 처리했습니다.<br>
 
-<br>
 
 문의 메일은 하이웍스 SMTPS로 전송합니다.<br>
 메일 발신자는 회사 계정으로 고정하고 Reply-To에 문의자의 주소를 넣어 발신자와 회신 대상을 분리했습니다.<br>
@@ -191,24 +189,21 @@ Certbot으로 인증서를 발급하고 자동 갱신을 구성했으며 HTTP �
 <br>
 
 ## ▎ 배포와 운영
-
-### · 배포 자동화 파이프라인
-
 ![소스 동기화부터 빌드·서비스 반영·상태 확인까지의 배포 자동화 파이프라인](assets/images/slides/08-deployment-pipeline.jpg)
 
-<br>
+### · 배포 자동화 파이프라인
 
 읽기 전용 GitHub Deploy Key로 소스를 가져오고 deploy.sh에 빌드와 Nginx·PM2 반영 절차를 묶었습니다.<br>
 배포 후에는 curl로 서비스 응답을 확인하도록 했습니다.<br>
 PM2에는 프로세스 자동 재시작과 서버 부팅 시 실행을 설정했습니다.<br>
 
 <br>
+<br>
 
-### · 서버 모니터링 및 운영 구조
+## ▎ 서버 모니터링 및 운영 구조
 
 ![tmux에서 리소스·네트워크·서비스 로그를 함께 확인하는 운영 화면](assets/images/slides/07-monitoring-and-operations.jpg)
 
-<br>
 
 tmux 화면을 세 영역으로 나눠 htop의 CPU·메모리, iftop의 네트워크 트래픽, 서비스 로그를 함께 확인했습니다.<br>
 Nginx의 access/error 로그는 도메인별로 분리하고 logrotate로 회전·압축·보관을 관리했습니다.<br>
@@ -221,7 +216,6 @@ Nginx의 access/error 로그는 도메인별로 분리하고 logrotate로 회전
 
 ![프론트엔드·백엔드·보안·인프라·운영의 기여 범위와 구축 결과를 정리한 통합 자료](assets/images/slides/09-contribution-and-results.png)
 
-<br>
 
 프론트엔드와 API 개발, 서버 설치, 네트워크 설정, 배포·운영까지 단독으로 맡았습니다.<br>
 1.0에서 서비스 운영 환경을 구성한 뒤, 2.0에서는 관리자 기능과 이미지 처리 방식, 화면 사용성을 보완했습니다.<br>
