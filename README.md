@@ -99,8 +99,8 @@ UFW에서 웹 서비스와 SSH에 필요한 포트만 허용하고 백엔드 포
 <table width="100%">
   <thead>
     <tr>
-      <th width="140">영역</th>
-      <th width="700">기술</th>
+      <th width="180">영역</th>
+      <th width="660">기술</th>
       <th width="280">적용 목적</th>
     </tr>
   </thead>
