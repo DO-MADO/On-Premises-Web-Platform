@@ -97,7 +97,13 @@ UFW에서 웹 서비스와 SSH에 필요한 포트만 허용하고 백엔드 포
 <br>
 
 <table width="100%">
-  <thead><tr><th width="23%">영역</th><th>기술</th></tr></thead>
+  <thead>
+    <tr>
+      <th width="140">영역</th>
+      <th width="700">기술</th>
+      <th width="280">적용 목적</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
       <td><strong>Frontend</strong></td>
@@ -110,6 +116,7 @@ UFW에서 웹 서비스와 SSH에 필요한 포트만 허용하고 백엔드 포
         <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white" alt="Axios">
         <img src="https://img.shields.io/badge/Sonner-1E293B?style=for-the-badge&logo=react&logoColor=white" alt="Sonner">
       </td>
+      <td>반응형 SPA·관리자 화면<br>다국어·테마 전환<br>로딩·오류 피드백</td>
     </tr>
     <tr>
       <td><strong>Backend / API</strong></td>
@@ -128,6 +135,7 @@ UFW에서 웹 서비스와 SSH에 필요한 포트만 허용하고 백엔드 포
         <br>
         <img src="https://img.shields.io/badge/dotenv-000000?style=for-the-badge&logo=dotenv&logoColor=white" alt="dotenv">
       </td>
+      <td>관리자 인증·콘텐츠 CRUD<br>이미지 업로드·문의 메일<br>입력 검증·요청 제어</td>
     </tr>
     <tr>
       <td><strong>DevOps / Infra</strong></td>
@@ -143,6 +151,7 @@ UFW에서 웹 서비스와 SSH에 필요한 포트만 허용하고 백엔드 포
         <img src="https://img.shields.io/badge/SSH-2C2D72?style=for-the-badge&logo=openssh&logoColor=white" alt="SSH">
         <img src="https://img.shields.io/badge/UFW-F05032?style=for-the-badge&logo=linux&logoColor=white" alt="UFW">
       </td>
+      <td>서버 구축·도메인 라우팅<br>HTTPS·접근 제어<br>배포 자동화·프로세스 관리</td>
     </tr>
     <tr>
       <td><strong>Monitoring / Logging</strong></td>
@@ -155,6 +164,7 @@ UFW에서 웹 서비스와 SSH에 필요한 포트만 허용하고 백엔드 포
         <img src="https://img.shields.io/badge/vnstat-004B87?style=for-the-badge&logo=linux&logoColor=white" alt="vnstat">
         <img src="https://img.shields.io/badge/crontab-5A29E4?style=for-the-badge&logo=linux&logoColor=white" alt="crontab">
       </td>
+      <td>리소스·트래픽 확인<br>서비스 로그 확인<br>로그 회전·압축·정기 백업</td>
     </tr>
   </tbody>
 </table>
